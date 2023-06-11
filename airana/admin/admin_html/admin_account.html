@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>airana admins</title>
+    <link rel="stylesheet" href="../admin_css/admin_styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="../admin_html/admin_account.html">airana</a>
+            <p>Administrator</p>
+        </div>
+        <div class="nav_bar">
+            <ul>
+                <li><a href="../admin_html/admin_account.html">Account</a></li>
+                <li><a href="../admin_html/admin_reservation.html">Reservation</a></li>
+                <li><a href="../admin_html/admin_mansion.html">Mansion</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="content_container">
+        <div class="content">
+            <p>Accounts</p>
+            <button class="add_admin_btn" onclick="toggleAddAdminPopUp()"><span>+</span> Add Admin</button>
+            <table class="account_tbl" border="1">
+                <tr>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Action</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="overlay">
+        <div class="popup">
+            <span class="close-button" onclick="toggleAddAdminPopUp()">X</span>
+            <h2 class="popup-title">Add Admin</h2>
+            <form class="popup-form">
+                <div class="form-field">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-field">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../admin_js/admin_script.js"></script>
+</body>
+
+</html>
