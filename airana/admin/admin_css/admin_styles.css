@@ -217,3 +217,36 @@ header {
     text-align: left;
     border: 1px solid #ddd;
 }
+.name ,.price{
+    margin: 20px;
+    padding: 10px;
+}
+.photo{
+    height: 300px;
+    border: 1px solid black;
+    margin-bottom: 100px;
+    margin: 20px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.input_photo{
+    position: relative;
+    bottom: -315px;
+
+}
+.submit{
+    margin-top: 35px;
+    padding: 5px;
+    background-color: rgb(225, 225, 225);
+    text-decoration: none;
+    color: rgb(56, 71, 132);
+    font-size: large;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+.submit:hover{
+    color: #fff;
+    background-color: rgb(56, 71, 132);
+    transition: 0.1s all ease-in-out;
+}
