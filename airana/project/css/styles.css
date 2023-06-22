@@ -154,7 +154,6 @@ header {
 /* Register Pop Up */
 
 .reg_popup {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -162,6 +161,9 @@ header {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 0.25s, opacity 0.25s;
 }
 
 .reg_popup_content {
@@ -170,7 +172,7 @@ header {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
-    padding: 20px;
+    padding: 20px 30px;
     border-radius: 5px;
     text-align: center;
 }
@@ -190,10 +192,15 @@ header {
 
 .reg_form_control {
     width: 100%;
-    padding: 10px 30px;
-    padding-left: 10px;
+    padding: 10px 40px;
+    padding-left: 20px;
     border-radius: 5px;
     border: 1px solid #ccc;
+}
+
+.reg_form_control:focus {
+    outline: none;
+    border-color: rgb(56, 71, 132);
 }
 
 .reg-close-button {
@@ -205,7 +212,8 @@ header {
 }
 
 .reg_btn {
-    padding: 10px 20px;
+    width: 100%;
+    padding: 10px 0;
     border-radius: 5px;
     border: none;
     cursor: pointer;
@@ -222,10 +230,16 @@ header {
     transition: 0.1s all ease-in-out;
 }
 
+/* Show pop-up when overlay is active */
+.reg_popup.active {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+}
+
 /* Login Pop Up */
 
 .login_popup {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -233,6 +247,9 @@ header {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 0.25s, opacity 0.25s;
 }
 
 .login_popup_content {
@@ -241,7 +258,7 @@ header {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
-    padding: 20px;
+    padding: 20px 30px;
     border-radius: 5px;
     text-align: center;
 }
@@ -261,10 +278,15 @@ header {
 
 .login_form_control {
     width: 100%;
-    padding: 10px 30px;
-    padding-left: 10px;
+    padding: 10px 40px;
+    padding-left: 20px;
     border-radius: 5px;
     border: 1px solid #ccc;
+}
+
+.login_form_control:focus {
+    outline: none;
+    border-color: rgb(56, 71, 132);
 }
 
 .login-close-button {
@@ -276,9 +298,17 @@ header {
 }
 
 .login_btn {
+    width: 100%;
     padding: 10px 20px;
     border-radius: 5px;
     border: none;
     cursor: pointer;
     font-size: medium;
+}
+
+/* Show pop-up when overlay is active */
+.login_popup.active {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
 }
