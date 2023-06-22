@@ -16,22 +16,14 @@ function updateLogoText(logoText) {
     }
 }
 
-const reg_popup = document.getElementById("reg_popup");
-
-function showRegisterPopUp() {
-    reg_popup.style.display = "block";
+// show/hide edit register pop-up
+function toggleRegisterPopUp() {
+    var reg_popup = document.querySelector('.reg_popup');
+    reg_popup.classList.toggle('active');
 }
 
-function hideRegisterPopUp() {
-    reg_popup.style.display = "none";
-}
-
-const login_popup = document.getElementById("login_popup");
-
-function showLoginPopUp() {
-    login_popup.style.display = "block";
-}
-
-function hideLoginPopUp() {
-    login_popup.style.display = "none";
+// show/hide edit login pop-up
+function toggleLoginPopUp() {
+    var login_popup = document.querySelector('.login_popup');
+    login_popup.classList.toggle('active');
 }
