@@ -30,8 +30,8 @@
                         height="25">
                     <img class="profile_img" src="../images/user_icon.jpeg" alt="user_icon" width="35" height="35">
                     <div class="dropdown-content">
-                        <a onclick="showRegisterPopUp()">Register</a>
-                        <a onclick="showLoginPopUp()">Login</a>
+                        <a onclick="toggleRegisterPopUp()">Register</a>
+                        <a onclick="toggleLoginPopUp()">Login</a>
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
     <!-- Register Pop Up -->
     <div id="reg_popup" class="reg_popup">
         <div class="reg_popup_content">
-            <span class="reg-close-button" onclick="hideRegisterPopUp()">&times;</span>
+            <span class="reg-close-button" onclick="toggleRegisterPopUp()">&times;</span>
             <form id="registration_form">
                 <h2>Register</h2>
                 <div class="reg_form_group">
@@ -74,7 +74,7 @@
     <!-- Login Pop Up -->
     <div id="login_popup" class="login_popup">
         <div class="login_popup_content">
-            <span class="login-close-button" onclick="hideLoginPopUp()">&times;</span>
+            <span class="login-close-button" onclick="toggleLoginPopUp()">&times;</span>
             <form id="login_form">
                 <h2>Login</h2>
                 <div class="login_form_group">
