@@ -217,6 +217,9 @@ header {
     text-align: left;
     border: 1px solid #ddd;
 }
+
+/* Mansion */
+
 .name ,.price{
     margin: 20px;
     padding: 10px;
