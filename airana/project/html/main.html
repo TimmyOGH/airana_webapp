@@ -31,8 +31,15 @@
                         height="25">
                     <img class="profile_img" src="../images/user_icon.jpeg" alt="user_icon" width="35" height="35">
                     <div class="dropdown-content">
-                        <a onclick="toggleRegisterPopUp()">Register</a>
-                        <a onclick="toggleLoginPopUp()">Login</a>
+                        <?php
+                            session_start();
+                            if ($_SESSION['loginSuccess'] === true || $_SESSION['registerSuccess'] === true) {
+                                echo "<a href='../php/logout.php'>Logout</a>";
+                            } else {
+                                echo "<a onclick='toggleRegisterPopUp()'>Register</a>";
+                                echo "<a onclick='toggleLoginPopUp()'>Login</a>";
+                            }
+                        ?>
                     </div>
                 </div>
             </div>
@@ -40,30 +47,47 @@
     </header>
 
     <!-- Register Pop Up -->
+    <?php require_once '../php/register.php'; ?>
+
+    <!-- Display RegPopUp if validation fails -->
+    <?php 
+        if (isset($_SESSION['emailExists']) || isset($_SESSION['usernameExists']) || isset($_SESSION['passwordsUnmatch'])) {
+            echo '<script>toggleRegisterPopUp();</script>';
+        }
+    ?>
+
     <div id="reg_popup" class="reg_popup">
         <div class="reg_popup_content">
             <span class="reg-close-button" onclick="toggleRegisterPopUp()">&times;</span>
-            <form id="registration_form">
+            <form id="registration_form" action="../php/register.php" method="POST">
                 <h2>Register</h2>
                 <div class="reg_form_group">
                     <label for="reg_email">Email:</label>
                     <input type="email" id="reg_email" name="reg_email" class="reg_form_control" required>
+                    <?php if (isset($_SESSION['emailExists']) && $_SESSION['emailExists'] === true) {
+                        echo "<p class='error-message'>*email already exists*</p>";
+                        unset($_SESSION['emailExists']);
+                    } ?>
                 </div>
                 <div class="reg_form_group">
                     <label for="reg_username">Username:</label>
                     <input type="text" id="reg_username" name="reg_username" class="reg_form_control" required>
+                    <?php if (isset($_SESSION['usernameExists']) && $_SESSION['usernameExists'] === true) {
+                        echo "<p class='error-message'>*username already exists*</p>";
+                        unset($_SESSION['usernameExists']);
+                    } ?>
                 </div>
                 <div class="reg_form_group">
                     <label for="reg_pwd">Password:</label>
                     <input type="password" id="reg_pwd" name="reg_pwd" class="reg_form_control" required>
                 </div>
                 <div class="reg_form_group">
-                    <label for="reg_conf_pwd">Password:</label>
+                    <label for="reg_conf_pwd">Confirm Password:</label>
                     <input type="password" id="reg_conf_pwd" name="reg_conf_pwd" class="reg_form_control" required>
-                </div>
-                <div class="reg_form_group">
-                    <label for="reg_ph_no">Phone No:</label>
-                    <input type="tel" id="reg_ph_no" name="reg_ph_no" class="reg_form_control" required>
+                    <?php if (isset($_SESSION['passwordsUnmatch']) && $_SESSION['passwordsUnmatch'] === true) {
+                        echo "<p class='error-message'>*passwords don't match*</p>";
+                        unset($_SESSION['passwordsUnmatch']);
+                    } ?>
                 </div>
                 <div class="reg_form_group">
                     <input type="submit" value="Register" class="reg_btn btn-primary">
@@ -73,10 +97,12 @@
     </div>
 
     <!-- Login Pop Up -->
+    <?php require_once '../php/login.php'; ?>
+
     <div id="login_popup" class="login_popup">
         <div class="login_popup_content">
             <span class="login-close-button" onclick="toggleLoginPopUp()">&times;</span>
-            <form id="login_form">
+            <form id="login_form" action="../php/login.php" method="POST">
                 <h2>Login</h2>
                 <div class="login_form_group">
                     <label for="login_username">Username:</label>
@@ -85,6 +111,10 @@
                 <div class="login_form_group">
                     <label for="login_pwd">Password:</label>
                     <input type="password" id="login_pwd" name="login_pwd" class="login_form_control" required>
+                    <?php if (isset($_SESSION['loginFailure']) && $_SESSION['loginFailure'] === true) {
+                        echo "<p class='error-message'>*username or password is incorrect*</p>";
+                        unset($_SESSION['loginFailure']);
+                    } ?>
                 </div>
                 <div class="login_form_group">
                     <input type="submit" value="Login" class="login_btn btn-primary">
@@ -92,19 +122,124 @@
             </form>
         </div>
     </div>
+
+    <!-- Catalogue -->
+
+    <div class="catalog" id="catalog-container"></div>
+
+    <script>
+        // Sample data representing vacation reservations
+        const reservations = [
+            {
+                id: 1,
+                photo: "../images/reserv1.jpg",
+                name: "Reservation 1",
+                dateRange: "June 10 - June 15, 2023",
+                rating: 4.3,
+                price: "$200"
+            },
+
+            {
+                id: 2,
+                photo: "../images/reserv2.jpg",
+                name: "Reservation 2",
+                dateRange: "June 10 - June 15, 2023",
+                rating: 4.8,
+                price: "$200"
+            },
+
+            {
+                id: 3,
+                photo: "../images/reserv3.jpg",
+                name: "Reservation 3",
+                dateRange: "June 10 - June 15, 2023",
+                rating: 3.7,
+                price: "$200"
+            },
+
+            {
+                id: 4,
+                photo: "../images/reserv4.jpg",
+                name: "Reservation 4",
+                dateRange: "June 10 - June 15, 2023",
+                rating: 3.7,
+                price: "$200"
+            },
+
+            {
+                id: 5,
+                photo: "../images/reserv5.jpg",
+                name: "Reservation 5",
+                dateRange: "June 10 - June 15, 2023",
+                rating: 3.7,
+                price: "$200"
+            },
+
+            {
+                id: 6,
+                photo: "../images/reserv6.jpg",
+                name: "Reservation 6",
+                dateRange: "June 10 - June 15, 2023",
+                rating: 3.7,
+                price: "$200"
+            },
+        ];
+
+
+        const catalogContainer = document.getElementById("catalog-container");
+
+        reservations.forEach(reservation => {
+            const panel = document.createElement("div");
+            panel.className = "panel";
+
+            const link = document.createElement("a");
+            link.href = "reserve.php";
+
+            const image = document.createElement("img");
+            image.src = reservation.photo;
+            image.alt = "Vacation Photo";
+            link.appendChild(image);
+
+            const title = document.createElement("h2");
+            title.textContent = reservation.name;
+            link.appendChild(title);
+
+            const date = document.createElement("p");
+            date.textContent = reservation.dateRange;
+            link.appendChild(date);
+
+            const rating = document.createElement("p");
+            rating.className = "rating";
+            rating.textContent = "★" + reservation.rating.toFixed(1);
+
+            link.appendChild(rating);
+
+            const price = document.createElement("p");
+            price.textContent = reservation.price;
+            link.appendChild(price);
+
+            panel.appendChild(link);
+            catalogContainer.appendChild(panel);
+        });
+    </script>
+
     <footer>
-        <div class="row">        
-            <div class="col-3" ><p>&copy;2023 Airana,inc.</p></div>
+        <div class="row">
+            <div class="col-3">
+                <p>&copy;2023 Airana,inc.</p>
+            </div>
             <div class="col-2"><a href="term.html">Terms</a></div>
             <div class="col-2"><a href="privacy.html">Privacy</a></div>
-            <div class="col-2"><a href="contact_us.html">Contact Us</a></div> 
-            <div class="col-1"><a href="https://www.facebook.com/"><img src="../image/facebook.png" alt="facebook" height="30px"></a></div>
-            <div class="col-1"><a href="https://www.instagram.com/"><img src="../image/instagram.png" alt="instagram" height="30px"></a></div>
-            <div class="col-1"><a href="https://twitter.com/"><img src="../image/twitter.png" alt="twitter" height="30px"></a></div>
-                       
+            <div class="col-2"><a href="contact_us.html">Contact Us</a></div>
+            <div class="col-1"><a href="https://www.facebook.com/"><img src="../images/facebook.png" alt="facebook"
+                        height="30px"></a></div>
+            <div class="col-1"><a href="https://www.instagram.com/"><img src="../images/instagram.png" alt="instagram"
+                        height="30px"></a></div>
+            <div class="col-1"><a href="https://twitter.com/"><img src="../images/twitter.png" alt="twitter"
+                        height="30px"></a></div>
         </div>
-        
     </footer>
+
     <script src="../js/script.js"></script>
 </body>
 
