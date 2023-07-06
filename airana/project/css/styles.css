@@ -312,3 +312,15 @@ header {
     opacity: 1;
     transition-delay: 0s;
 }
+
+footer{
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px #f0f0f0 solid;
+    
+}
+.row div{
+    padding: 5px;
+}
