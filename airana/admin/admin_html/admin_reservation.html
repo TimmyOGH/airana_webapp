@@ -10,6 +10,40 @@
 </head>
 
 <body>
+    <!-- Admin Login -->
+    <?php
+    session_start();
+    if (!isset($_SESSION['adminLoggedIn'])) {
+    ?>
+    <div id="admin-login-container">
+        <div id="admin-login-overlay"></div>
+        <div id="admin-login-popup">
+            <h2>Administrator Login</h2>
+            <form id="admin-login-form" action="../admin_php/admin_login.php" method="POST">
+                <div class="form-group">
+                    <label for="admin_login_username">Username:</label>
+                    <input type="text" id="admin_login_username" name="admin_login_username"
+                        value="<?php echo $admin_usernameValue ?>" required>
+                </div>
+                <div class="form-group">
+                    <label for="admin_login_password">Password:</label>
+                    <input type="password" id="admin_login_password" name="admin_login_password" required>
+                </div>
+                <?php
+                    if (isset($_SESSION['loginError'])) {
+                        echo '<div class="login-error-message">' . $_SESSION['loginError'] . '</div>';
+                        unset($_SESSION['loginError']);
+                    }
+                    ?>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+    <?php
+    }
+    ?>
+    
+    <!-- Header -->
     <header>
         <div class="logo">
             <a href="../admin_html/admin_reservation.html">airana</a>
