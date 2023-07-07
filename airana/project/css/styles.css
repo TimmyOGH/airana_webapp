@@ -149,10 +149,6 @@ header {
     .logo a {
         font-family: 'Cherry Bomb One', cursive;
     }
-
-    .burger_img {
-        display: none;
-    }
 }
 
 @media screen and (max-width: 483px) {
