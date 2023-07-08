@@ -345,6 +345,7 @@ header {
     /* Center the panels horizontally */
     align-items: center;
     /* Center the panels vertically */
+    margin-top: 30px;
 }
 
 .panel {
@@ -354,9 +355,11 @@ header {
     box-sizing: border-box;
     margin: 0;
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .panel img {
+    border-radius: 25px;
     max-width: 100%;
     height: 200px;
     /* Set a fixed height for the images */
@@ -373,9 +376,18 @@ header {
     color: inherit;
 }
 
+.panel h3 {
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.panel p {
+    font-size: 15px;
+}
+
 .rating {
-    font-size: 20px;
-    color: orange;
+    font-size: 15px;
+    color: rgb(225, 146, 0);
 }
 
 @media only screen and (max-width: 767px) {
@@ -413,29 +425,71 @@ header {
 /* Footer */
 
 footer {
-    text-align: center;
     position: fixed;
     bottom: 0;
     width: 100%;
-    border-top: 1px #f0f0f0 solid;
+    border-top: 1px solid #f0f0f0;
     background-color: #fff;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.8s;
 }
 
-.row div {
-    padding: 5px;
-    margin-top: 15px;
+footer.hidden {
+    transform: translateY(100%);
 }
 
-.row p {
+footer p {
     color: rgb(56, 71, 132);
+    margin-left: 40px;
 }
 
-.row a {
+footer p a {
     text-decoration: none;
     color: rgb(56, 71, 132);
 }
 
-.row a:hover {
+footer p a:hover {
+    text-decoration: none;
     color: #000;
     transition: 0.1s all ease-in-out;
+}
+
+footer .social-icons {
+    display: flex;
+    position: absolute;
+    right: 0;
+    margin-top: 4px;
+    margin-right: 50px;
+}
+
+footer .social-icons img {
+    margin-left: 30px;
+}
+
+@media only screen and (max-width: 732px) {
+    footer {
+        display: block;
+        align-items: center;
+        text-align: center;
+    }
+
+    footer p {
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    footer .social-icons {
+        position: static;
+        margin-top: 0;
+        display: block;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    footer .social-icons img {
+        margin: 5px 5px 0;
+    }
 }
