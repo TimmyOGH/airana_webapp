@@ -27,3 +27,31 @@ function toggleLoginPopUp() {
     var login_popup = document.querySelector('.login_popup');
     login_popup.classList.toggle('active');
 }
+
+// show/hide footer with animation
+var lastScrollTop = 0;
+var footer = document.querySelector('footer');
+
+function hideFooter() {
+    footer.classList.add('hidden');
+}
+
+function showFooter() {
+    footer.classList.remove('hidden');
+}
+
+function handleScroll() {
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (scrollTop > lastScrollTop) {
+        hideFooter();
+    } else {
+        showFooter();
+    }
+
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For mobile or negative scrolling
+}
+
+window.addEventListener('scroll', function () {
+    handleScroll();
+});
