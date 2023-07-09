@@ -39,6 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reg_username']) && is
             $insert_st->execute();
 
             $_SESSION['registerSuccess'] = true;
+            header("Location: /airana/project/html/main.html");
+        exit();
         } else {
             if (!$usernameValid) {
                 $_SESSION['usernameExists'] = true;
@@ -53,10 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reg_username']) && is
 
         $conn = null;
 
-        header("Location: /airana/project/html/main.html");
+        header("Location: /airana/project/html/register.html");
         exit();
     } catch (PDOException $e) {
         die("Query failed: " . $e->getMessage());
     }
 }
-?>
