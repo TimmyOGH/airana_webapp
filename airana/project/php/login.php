@@ -19,12 +19,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login_username']) && 
 
         if ($res) {
             $_SESSION['loginSuccess'] = true;
+            header("Location: /airana/project/html/main.html");
+            exit();
         } else {
             $_SESSION['loginFailure'] = true;
+            header("Location: /airana/project/html/login.html");
+            exit();
         }
 
-        header("Location: /airana/project/html/main.html");
-        exit();
     } catch (PDOException $e) {
         die("Query failed: " . $e->getMessage());
     }
