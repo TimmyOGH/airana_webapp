@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>airana</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Instrument+Sans&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <h4><a id="logo_text" href="../html/main.html">airana</a></h4>
+        </div>
+        <div class="search-box" style="visibility: hidden;">
+            <input class="search-input" type="text" placeholder="Search">
+            <button class="search-btn"><i class="fa fa-search"></i></button>
+        </div>
+        <div class="menu-container">
+            <div class="menu-profile">
+                <div class="dropdown">
+                    <img class="burger_img" src="../images/hamburger_menu.png" alt="hamburger_menu" width="25"
+                        height="25">
+                    <img class="profile_img" src="../images/user_icon.jpeg" alt="user_icon" width="35" height="35">
+                    <div class="dropdown-content">
+                        <?php
+                            session_start();
+                            if ($_SESSION['loginSuccess'] === true || $_SESSION['registerSuccess'] === true) {
+                                echo "<a href='../php/logout.php'>Logout</a>";
+                            } else {
+                                echo "<a href='register.html'>Register</a>";
+                                echo "<a href='login.html'>Login</a>";
+                            }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login Form -->
+    <?php require_once '../php/login.php'; ?>
+
+    <div id="login_form_container">
+        <form id="login_form" action="../php/login.php" method="POST">
+            <h2>Login</h2>
+            <div class="login_form_group">
+                <label for="login_username">Username:</label>
+                <input type="text" id="login_username" name="login_username" class="login_form_control" required>
+            </div>
+            <div class="login_form_group">
+                <label for="login_pwd">Password:</label>
+                <input type="password" id="login_pwd" name="login_pwd" class="login_form_control" required>
+                <?php if (isset($_SESSION['loginFailure']) && $_SESSION['loginFailure'] === true) {
+                    echo "<p class='error-message' style=''>*invalid credentials*</p>";
+                    unset($_SESSION['loginFailure']);
+                } ?>
+            </div>
+            <div class="login_form_group">
+                <input type="submit" value="Login" class="login_btn btn-primary">
+            </div>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy;<span id="year"></span> Airana, Inc.</p>
+    </footer>
+
+    <script type="module" src="../js/script.js"></script>
+</body>
+
+</html>

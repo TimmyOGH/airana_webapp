@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>airana</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Instrument+Sans&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <h4><a id="logo_text" href="../html/main.html">airana</a></h4>
+        </div>
+        <div class="search-box" style="visibility: hidden;">
+            <input class="search-input" type="text" placeholder="Search">
+            <button class="search-btn"><i class="fa fa-search"></i></button>
+        </div>
+        <div class="menu-container">
+            <div class="menu-profile">
+                <div class="dropdown">
+                    <img class="burger_img" src="../images/hamburger_menu.png" alt="hamburger_menu" width="25"
+                        height="25">
+                    <img class="profile_img" src="../images/user_icon.jpeg" alt="user_icon" width="35" height="35">
+                    <div class="dropdown-content">
+                        <?php
+                            session_start();
+                            if ($_SESSION['loginSuccess'] === true || $_SESSION['registerSuccess'] === true) {
+                                echo "<a href='../php/logout.php'>Logout</a>";
+                            } else {
+                                echo "<a href='register.html'>Register</a>";
+                                echo "<a href='login.html'>Login</a>";
+                            }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Register Form -->
+    <?php require_once '../php/register.php'; ?>
+
+    <div id="reg_form_container">
+        <form id="registration_form" action="../php/register.php" method="POST">
+            <h2>Register</h2>
+            <div class="reg_form_group">
+                <label for="reg_email">Email:</label>
+                <input type="email" id="reg_email" name="reg_email" class="reg_form_control" required>
+                <?php if (isset($_SESSION['emailExists']) && $_SESSION['emailExists'] === true) {
+                    echo "<p class='error-message'>*email already exists*</p>";
+                    unset($_SESSION['emailExists']);
+                } ?>
+            </div>
+            <div class="reg_form_group">
+                <label for="reg_username">Username:</label>
+                <input type="text" id="reg_username" name="reg_username" class="reg_form_control" required>
+                <?php if (isset($_SESSION['usernameExists']) && $_SESSION['usernameExists'] === true) {
+                    echo "<p class='error-message'>*username already exists*</p>";
+                    unset($_SESSION['usernameExists']);
+                } ?>
+            </div>
+            <div class="reg_form_group">
+                <label for="reg_pwd">Password:</label>
+                <input type="password" id="reg_pwd" name="reg_pwd" class="reg_form_control" required>
+            </div>
+            <div class="reg_form_group">
+                <label for="reg_conf_pwd">Confirm Password:</label>
+                <input type="password" id="reg_conf_pwd" name="reg_conf_pwd" class="reg_form_control" required>
+                <?php if (isset($_SESSION['passwordsUnmatch']) && $_SESSION['passwordsUnmatch'] === true) {
+                    echo "<p class='error-message'>*passwords don't match*</p>";
+                    unset($_SESSION['passwordsUnmatch']);
+                } ?>
+            </div>
+            <div class="reg_form_group">
+                <input type="submit" value="Register" class="reg_btn btn-primary">
+            </div>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy;<span id="year"></span> Airana, Inc.</p>
+    </footer>
+
+    <script type="module" src="../js/script.js"></script>
+</body>
+
+</html>
