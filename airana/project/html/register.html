@@ -88,10 +88,16 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy;<span id="year"></span> Airana, Inc.</p>
+        <p>&copy;<span class="year"></span> Airana, Inc.</p>
     </footer>
 
-    <script type="module" src="../js/script.js"></script>
+    <script>
+        // update year dynamically
+        var year = document.querySelector('.year');
+        year.innerHTML = new Date().getFullYear();
+    </script>
+
+    <script src="../js/script.js"></script>
 </body>
 
 </html>
