@@ -8,13 +8,12 @@
     <title>airana</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Instrument+Sans&display=swap"
         rel="stylesheet">
 </head>
 
 <body>
-    
+
     <!-- Header -->
     <header>
         <div class="logo">
@@ -47,11 +46,38 @@
     </header>
 
     <!-- Catalogue -->
-    <div class="catalog" id="catalog-container"></div>
+    <div class="catalog" id="catalog-container">
+        <?php 
+            require_once '../php/config.php';
+
+            try {
+                $conn = connect();
+                $sql = "select p.photo, v.name, v.startDate, v.endDate, v.price, r.rating from VacationHome v, Review r, Photo p, Photo2 p2, Photo3 p3 where v.vhid = p.vhid and p.vhid = p2.vhid and p.vhid = p3.vhid and v.vhid = r.vhid;";
+                $rows = $conn->query($sql);
+                $conn = null;
+
+                foreach ($rows as $row) {
+                    echo "<div class='panel'>";
+                    echo "<a href='../php/reserve.php'>";
+                    echo "<img src='../images/" . $row["photo"] . "' alt='". $row["photo"] ."'>";
+                    echo "<h3>" . $row["name"] . "</h3>";
+                    echo "<p style='color: rgb(125, 125, 125);'>" . date("M d", strtotime($row["startDate"])) . " &#8212; " . date("d", strtotime($row["endDate"])) . "</p>";
+                    echo "<p class='rating'>★". $row["rating"] ."</p>";
+                    echo "<p>$". $row["price"] ."</p>";
+                    echo "</a>";
+                    echo "</div>";
+                }
+
+            } catch (PDOException $e) {
+                $conn = null;
+                die("Query failed: " . $e->getMessage());
+            }
+        ?>
+    </div>
 
     <!-- Footer -->
     <footer>
-        <p>&copy;<span id="year"></span> Airana, Inc.</p>
+        <p>&copy;<span class="year"></span> Airana, Inc.</p>
         <p><a href="term.html">Terms</a></p>
         <p><a href="privacy.html">Privacy</a></p>
         <p><a href="contact_us.html">Contact Us</a></p>
@@ -62,7 +88,13 @@
         </div>
     </footer>
 
-    <script type="module" src="../js/script.js"></script>
+    <script>
+        // update year dynamically
+        var year = document.querySelector('.year');
+        year.innerHTML = new Date().getFullYear();
+    </script>
+
+    <script src="../js/script.js"></script>
 </body>
 
 </html>
