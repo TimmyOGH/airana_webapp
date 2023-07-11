@@ -109,20 +109,6 @@ header {
     justify-content: space-between;
 }
 
-.logo a {
-    text-decoration: none;
-    color: rgb(125, 125, 125);
-    font-size: x-large;
-    margin-left: 25px;
-    font-weight: bold;
-}
-
-.logo p {
-    font-size: large;
-    color: rgb(125, 125, 125);
-    margin-right: 25px;
-}
-
 .nav_bar {
     height: 90px;
     display: flex;
