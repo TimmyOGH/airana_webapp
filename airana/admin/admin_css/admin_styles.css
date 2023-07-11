@@ -5,7 +5,95 @@
     font-family: 'Instrument Sans', sans-serif;
 }
 
-/* Admin Header */
+/* Admin Login */
+
+#admin-login-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+}
+
+#admin-login-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#admin-login-popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f7f7f7;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+#admin-login-popup h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+#admin-login-form .form-group {
+    margin-bottom: 20px;
+}
+
+#admin-login-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: large;
+}
+
+#admin-login-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+    font-size: 16px;
+}
+
+#admin-login-form input:focus {
+    outline: none;
+    border-color: rgb(120, 130, 171);
+}
+
+#admin-login-form button {
+    width: 100%;
+    padding: 12px 24px;
+    background-color: rgb(120, 130, 171);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: large;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+#admin-login-form button:hover {
+    background-color: rgb(56, 71, 132);
+}
+
+.login-error-message {
+    color: rgb(150, 0, 0);
+    margin-bottom: 25px;
+}
+
+/* Header */
 
 header {
     padding: 10px;
@@ -110,15 +198,48 @@ header {
     border-collapse: collapse;
 }
 
-.account_tbl th {
+.account_tbl th,
+td {
     padding: 8px;
     text-align: left;
     border: 1px solid #ddd;
 }
 
+.edit-button {
+    margin: 0 8px;
+    padding: 10px 20px;
+    background-color: rgb(175, 175, 0);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: medium;
+}
+
+.edit-button:hover {
+    background-color: rgb(125, 125, 0);
+    transition: 0.1s all ease-in-out;
+}
+
+.delete-button {
+    margin: 0 8px;
+    padding: 10px;
+    background-color: rgb(125, 0, 0);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: medium;
+}
+
+.delete-button:hover {
+    background-color: rgb(75, 0, 0);
+    transition: 0.1s all ease-in-out;
+}
+
 /* Add New Admin Pop-Up */
 
-.overlay {
+.add_admin_overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -136,7 +257,7 @@ header {
 
 .popup {
     background-color: #fff;
-    padding: 20px;
+    padding: 20px 30px;
     max-width: 400px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -154,19 +275,28 @@ header {
 
 .form-field {
     display: flex;
+    text-align: center;
     flex-direction: column;
     margin-bottom: 15px;
 }
 
 .form-field label {
     font-weight: bold;
+    margin-bottom: 5px;
 }
 
 .form-field input {
+    width: 200px;
     height: 30px;
-    padding: 5px;
+    padding: 10px 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 15px;
+}
+
+.form-field input:focus {
+    outline: none;
+    border-color: rgb(56, 132, 93);
 }
 
 .form-actions {
@@ -176,12 +306,14 @@ header {
 }
 
 .form-actions button {
-    padding: 8px 20px;
+    width: 100%;
+    padding: 10px;
     background-color: rgb(56, 132, 93);
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: medium;
 }
 
 .form-actions button:hover {
@@ -189,7 +321,7 @@ header {
     transition: 0.1s all ease-in-out;
 }
 
-.close-button {
+.add-close-button {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -199,7 +331,104 @@ header {
 }
 
 /* Show pop-up when overlay is active */
-.overlay.active {
+.add_admin_overlay.active {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+}
+
+/* Edit Admin Pop-Up */
+
+.edit_admin_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 0.25s, opacity 0.25s;
+}
+
+.edit_admin_overlay .form-field input:focus {
+    outline: none;
+    border-color: rgb(175, 175, 0);
+}
+
+.edit_admin_overlay .form-actions button {
+    background-color: rgb(175, 175, 0);
+}
+
+.edit_admin_overlay .form-actions button:hover {
+    background-color: rgb(125, 125, 0);
+    transition: 0.1s all ease-in-out;
+}
+
+.edit-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Show pop-up when overlay is active */
+.edit_admin_overlay.active {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+}
+
+/* Delete Admin Pop-Up */
+
+.delete_admin_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 0.25s, opacity 0.25s;
+}
+
+.delete_admin_overlay p {
+    margin-top: 25px;
+    font-size: large;
+}
+
+.delete_admin_overlay .form-actions button {
+    width: 25%;
+    background-color: rgb(125, 0, 0);
+}
+
+.delete_admin_overlay .form-actions button:hover {
+    background-color: rgb(75, 0, 0);
+    transition: 0.1s all ease-in-out;
+}
+
+.delete-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Show pop-up when overlay is active */
+.delete_admin_overlay.active {
     visibility: visible;
     opacity: 1;
     transition-delay: 0s;
@@ -216,40 +445,4 @@ header {
     padding: 8px;
     text-align: left;
     border: 1px solid #ddd;
-}
-
-/* Mansion */
-
-.name ,.price{
-    margin: 20px;
-    padding: 10px;
-}
-.photo{
-    height: 300px;
-    border: 1px solid black;
-    margin-bottom: 100px;
-    margin: 20px;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-.input_photo{
-    position: relative;
-    bottom: -315px;
-
-}
-.submit{
-    margin-top: 35px;
-    padding: 5px;
-    background-color: rgb(225, 225, 225);
-    text-decoration: none;
-    color: rgb(56, 71, 132);
-    font-size: large;
-    margin-left: 10px;
-    border-radius: 5px;
-}
-.submit:hover{
-    color: #fff;
-    background-color: rgb(56, 71, 132);
-    transition: 0.1s all ease-in-out;
 }
