@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vacation Reservation Catalog</title>
+  <link rel="stylesheet" href="../css/catalogue.css">
+</head>
+<body>
+    
+<h1>Reservation</h1>
+
+  <div class="catalog" id="catalog-container"></div>
+
+  <script>
+    // Sample data representing vacation reservations
+    const reservations = [
+      {
+        id: 1,
+        photo: "../images/Cabana_do_Sossego.png",
+        name: "Reservation 1",
+        dateRange: "June 10 - June 15, 2023",
+        rating: 4.3,
+        price: "$200"
+      },
+      
+      {
+        id: 2,
+        photo: "../images/Canyon_Creek_Cabins.png",
+        name: "Reservation 2",
+        dateRange: "June 10 - June 15, 2023",
+        rating: 4.8,
+        price: "$200"
+      },
+
+      {
+        id: 3,
+        photo: "../images/Cute_Farmhouse.png",
+        name: "Reservation 3",
+        dateRange: "June 10 - June 15, 2023",
+        rating: 3.7,
+        price: "$200"
+      },
+
+      {
+        id: 4,
+        photo: "../images/La_Stalla.png",
+        name: "Reservation 4",
+        dateRange: "June 10 - June 15, 2023",
+        rating: 3.7,
+        price: "$200"
+      },
+
+      {
+        id: 5,
+        photo: "../images/Minoas_Sea_Villa.png",
+        name: "Reservation 5",
+        dateRange: "June 10 - June 15, 2023",
+        rating: 3.7,
+        price: "$200"
+      },
+
+      {
+        id: 6,
+        photo: "../images/Mirrored_Glass_Cabin.png",
+        name: "Reservation 6",
+        dateRange: "June 10 - June 15, 2023",
+        rating: 3.7,
+        price: "$200"
+      },
+    ];
+
+    
+    const catalogContainer = document.getElementById("catalog-container");
+
+    reservations.forEach(reservation => {
+      const panel = document.createElement("div");
+      panel.className = "panel";
+
+      const link = document.createElement("a");
+      link.href = "reservation" + reservation.id + ".php";
+
+      const image = document.createElement("img");
+      image.src = reservation.photo;
+      image.alt = "Vacation Photo";
+      link.appendChild(image);
+
+      const title = document.createElement("h2");
+      title.textContent = reservation.name;
+      link.appendChild(title);
+
+      const date = document.createElement("p");
+      date.textContent = reservation.dateRange;
+      link.appendChild(date);
+
+      const rating = document.createElement("p");
+      rating.className = "rating";
+      rating.textContent = "★" + reservation.rating.toFixed(1);
+
+      link.appendChild(rating);
+
+      const price = document.createElement("p");
+      price.textContent = reservation.price;
+      link.appendChild(price);
+
+      panel.appendChild(link);
+      catalogContainer.appendChild(panel);
+    });
+  </script>
+</body>
+</html>
